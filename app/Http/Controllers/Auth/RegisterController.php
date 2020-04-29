@@ -5,11 +5,15 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
+use App\Seller;
+use App\Buyer;
+use App\Admin;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 use Illuminate\Validation\Rule;
+
 
 class RegisterController extends Controller
 {
@@ -52,9 +56,10 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'type' => ['required', Rule::in(['admin','seller','buyer'])],
-            'phone' => ['required', 'numeric', 'size:11', 'unique:users'],
+            'name' => ['required', 'string', 'max:80'],
+            'type' => ['required', Rule::in(['Admin','Seller','Buyer'])],
+            'address' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'string', 'size:11', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -67,11 +72,34 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'type' => $data['type'],
             'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
         ]);
+        $type = $data['type'];
+
+
+        if($type=='Buyer'){
+            $buyer = Buyer::create([
+                'user_id'=>$user->id,
+                'address' => $data['address']
+            ]);
+        }
+        else if($type =='Seller'){
+            $seller = Seller::create([
+                'user_id' => $user->id,
+                'address' => $data['address']
+            ]);
+        }
+        else if($type =='Admin'){
+            $admin = Admin::create([
+                'user_id' => $user->id,
+                'address' => $data['address']
+            ]);
+        }
+
+        return $user;
     }
 }

@@ -41,18 +41,18 @@
 
                         
 
-                        <div class="form-group row mb-0 mt-2">
+                        <div class="form-group row mb-0 mt-4">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary btn-block">
                                     {{ __(' প্রবেশ করুন') }}
                                 </button>
                             </div>
                         </div>
-                        <div class="form-group row mb-0 mt-2">
-                            <div class="col-md-8 offset-md-4">
+                        <div class="form-group row mb-0 mt-4">
+                            <div class="col-md-6 offset-md-4 text-center">
                                 <p>
-                                    পূর্বে কোন একাউন্ট না থাকলে 
-                                    <a href="#"> নিবন্ধন করুন। </a>
+                                    আপনার কোন একাউন্ট নেই?  
+                                    <a href="{{ route('register') }}">  নিবন্ধন করুন। </a>
                                 </p>
                             </div>
                         </div>
