@@ -8,6 +8,35 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+    public function admin(){
+        return $this->hasOne('app\Admin');
+    }
+    public function seller(){
+        return $this->hasOne('app\Seller');
+    }
+    public function buyer(){
+        return $this->hasOne('app\Buyer');
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     use Notifiable;
 
     /**
@@ -16,7 +45,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'type', 'phone', 'password',
     ];
 
     /**
@@ -33,7 +62,5 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    // protected $casts = ['email_verified_at' => 'datetime',];
 }
