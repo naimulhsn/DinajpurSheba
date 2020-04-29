@@ -68,7 +68,7 @@ body {
   margin: 0;
   font-family: "Nunito", sans-serif;
   font-size: 0.9rem;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.6;
   color: #212529;
   text-align: left;
@@ -177,7 +177,7 @@ a {
 
 a:hover {
   color: #1d68a7;
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 a:not([href]) {

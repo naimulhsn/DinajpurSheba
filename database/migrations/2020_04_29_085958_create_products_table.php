@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration
             $table->string('product_name');
             $table->string('product_variety');
             $table->integer('stock');
+            $table->integer('price');
             $table->string('loading_point');
             $table->timestamps();
         });

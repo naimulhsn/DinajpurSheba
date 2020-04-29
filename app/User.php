@@ -9,13 +9,17 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     public function admin(){
-        return $this->hasOne('app\Admin');
+        return $this->hasOne('App\Admin');
     }
     public function seller(){
-        return $this->hasOne('app\Seller');
+        return $this->hasOne('App\Seller');
     }
     public function buyer(){
-        return $this->hasOne('app\Buyer');
+        return $this->hasOne('App\Buyer');
+    }
+
+    public function products(){
+        return $this->hasMany('App\Product');
     }
 
 
