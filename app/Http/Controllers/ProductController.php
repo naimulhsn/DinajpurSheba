@@ -92,9 +92,13 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show($id)
     {
-        //
+        $product = Product::where('id',$id)->first();
+        //dd($product);
+        return view('product.show',[
+            'product' => $product
+        ]);
     }
 
     /**
@@ -103,9 +107,13 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit($id)
     {
-        //
+        $product = Product::where('id',$id)->first();
+        //dd($product);
+        return view('product.edit',[
+            'product' =>$product
+        ]);
     }
 
     /**
@@ -115,9 +123,26 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request,  $id)
     {
-        //
+        
+        $product = Product::findOrFail($id);
+        if($product->user_id!= auth()->id() )abort(403);
+
+        $val=request()->validate([
+            'product_variety'=>[ 'required', 'string' ],
+            'stock'=>['required', 'numeric','min:1','max:10000000'],
+            'price'=>['required', 'numeric','min:100','max:50000'],
+            'loading_point'=>[ 'required', 'string' ],
+
+        ]);
+        $product->product_variety = $val['product_variety'];
+        $product->stock = $val['stock'];
+        $product->price = $val['price'];
+        $product->loading_point = $val['loading_point'];
+        //dd($id);
+        $product->save();
+        return redirect()->route('Products.show',$product->id)->with('status',' পন্যটির তথ্য আপডেট হয়ে গেছে');
     }
 
     /**
@@ -126,8 +151,14 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        if($product->user_id!= auth()->id() )abort(403);
+        
+
+
+        $product->delete();
+        return redirect()->route('Products.index')->with('bad_status','পন্যটি ডিলিট করা হয়েছে');
     }
 }

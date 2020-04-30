@@ -34,7 +34,7 @@
                         <div class="form-group row">
                             <label for="product_variety" class="col-md-3 col-form-label text-md-right">{{ __('জাতের নাম / Variety') }}</label>
                             <div class="col-md-7">
-                                <input id="product_variety"product_varietye="text" class="form-control @error('product_variety') is-invalid @enderror" name="product_variety" 
+                                <input id="product_variety" type="text" class="form-control @error('product_variety') is-invalid @enderror" name="product_variety" 
                                 value="{{ old('product_variety') }}" required autocomplete="product_variety" autofocus>
                                 @error('product_variety')
                                     <span class="invalid-feedback" role="alert">

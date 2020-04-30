@@ -14,10 +14,10 @@
                     @endphp
                     {{-- foreach adddddddddddddddddddddddddd --}}
                         <div class="col col-12 col-sm-6 col-md-4 col-lg-3">
-                            <a href="#">
+                            <a href={{route('Products.show', $product->id)}}>
 
                                 <div class="custom_card card mb-4">
-                                    <img src="{{ $product->image->image_link }}" class="card-img-top mt-2 mr-2 mb-2"
+                                    <img src="{{ $product->image->image_link }}" class="card-img-top mt-2"
                                      style="height:200px; object-fit:contain" alt="{{ $product->product_variety }}">
                                     <div class="card-img-overlay">
                                         <span class="badge badge-success pt-2 pb-1" style="font-size:0.8rem">লিচু</span>
@@ -29,7 +29,7 @@
                                             {{ $product->product_variety }}
                                         </p>
                                         <div>
-                                            <p class="d-inline " style="color:seagreen"> মূল্য : </p> 
+                                            <p class="d-inline text-dark"> মূল্য : </p> 
                                             <strong class="d-inline" style="color:seagreen">৳ {{ $product->price }} </strong> <span>(প্রতি হাজার)</span>
                                         </div>
                                         <span>
