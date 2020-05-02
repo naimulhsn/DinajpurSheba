@@ -10,6 +10,8 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
+    
+
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
@@ -26,13 +28,14 @@
     
 </head>
 <body>
-    <div id="app">
+    <div id="app" >
         <nav class="navbar navbar-expand-md navbar-dark bg-primary shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/home') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" 
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
@@ -57,16 +60,21 @@
                         @else
                             @if(Auth::user()->type=='Seller')
                                 <li>
-                                    <a class="nav-item nav-link text-light" href="{{ route('home') }}">
+                                    <a class="nav-item nav-link text-light" href="{{ route('orders.index') }}">
                                         {{ __('আমার অর্ডার') }}
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="nav-item nav-link text-light" href={{ route('Products.index')}} >
+                                    <a class="nav-item nav-link text-light" href={{ route('products.index')}} >
                                         {{ __('আমার পণ্য') }}
                                     </a>
                                 </li>
-
+                            @elseif(Auth::user()->type=='Buyer')
+                                <li>
+                                    <a class="nav-item nav-link text-light" href="{{ route('orders.index') }}">
+                                        {{ __('আমার অর্ডার') }}
+                                    </a>
+                                </li>
                             @endif
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link text-light dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -74,7 +82,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" href={{route('profile.show',Auth::user()->id)}}>
                                         <i class="fa fa-user"></i>
                                         {{__('আমার প্রোফাইল')}}
                                     </a>
@@ -105,7 +113,7 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main class="">
             @yield('content')
         </main>
     </div>

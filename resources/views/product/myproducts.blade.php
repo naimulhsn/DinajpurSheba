@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container-fluid">
+<div class="container-fluid pt-4">
     <div class="row justify-content-center">
         <div class="col-md-10">
-            <a class="" href="{{ route('Products.create') }}">
+            <a class="" href="{{ route('products.create') }}">
                 <button type="button" class="btn btn-outline-primary btn-block"><i class="fa fa-plus"> পণ্য আপলোড করুন</i></button>
             </a>
         </div>
@@ -44,9 +44,9 @@
                                     </span>
                                     <br>
                                     
-                                    <a class="btn btn-outline-success btn-block card-linkk" href="{{route('Products.show',$product->id)}} " role="button">পণ্যটি দেখুন</a>
-                                    <a class="btn btn-outline-primary btn-block card-linkk" href="{{route('Products.edit',$product->id)}}" role="button"> তথ্য পরিবর্তন করুন</a>                                              
-                                    <form method="POST" action="{{ route('Products.destroy',$product->id) }}">
+                                    <a class="btn btn-outline-success btn-block card-linkk" href="{{route('products.show',$product->id)}} " role="button">পণ্যটি দেখুন</a>
+                                    <a class="btn btn-outline-primary btn-block card-linkk" href="{{route('products.edit',$product->id)}}" role="button"> তথ্য পরিবর্তন করুন</a>                                              
+                                    <form method="POST" action="{{ route('products.destroy',$product->id) }}">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-outline-danger btn-block mt-2 card-linkk">পন্যটি ডিলিট করে দিন</button>

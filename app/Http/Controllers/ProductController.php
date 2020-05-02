@@ -24,6 +24,7 @@ class ProductController extends Controller
     public function index()
     {
         $user = Auth::user();
+        
         if($user->type!='Seller' )abort(403);
         $products = $user->products()->latest()->get();
         //dd($products);
@@ -83,7 +84,7 @@ class ProductController extends Controller
             'image_link' => "/images/Products/".$imageName,
         ]);
         
-        return redirect()->route('Products.index')->with('status','Your Product is uploaded successfuly');
+        return redirect()->route('products.index')->with('status','Your Product is uploaded successfuly');
     }
 
     /**
@@ -142,7 +143,7 @@ class ProductController extends Controller
         $product->loading_point = $val['loading_point'];
         //dd($id);
         $product->save();
-        return redirect()->route('Products.show',$product->id)->with('status',' পন্যটির তথ্য আপডেট হয়ে গেছে');
+        return redirect()->route('products.show',$product->id)->with('status',' পন্যটির তথ্য আপডেট হয়ে গেছে');
     }
 
     /**
@@ -159,6 +160,6 @@ class ProductController extends Controller
 
 
         $product->delete();
-        return redirect()->route('Products.index')->with('bad_status','পন্যটি ডিলিট করা হয়েছে');
+        return redirect()->route('products.index')->with('bad_status','পন্যটি ডিলিট করা হয়েছে');
     }
 }

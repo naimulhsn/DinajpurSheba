@@ -73,20 +73,60 @@ jQuery(document).ready(function($) {
 var sitePlusMinus = function() {
     $('.js-btn-minus').on('click', function(e){
         e.preventDefault();
+        
         if ( $(this).closest('.input-group').find('.quantity').val()  >1  ) {
             $(this).closest('.input-group').find('.quantity').val(parseInt($(this).closest('.input-group').find('.quantity').val()) - 1);
         } else {
             $(this).closest('.input-group').find('quantity').val(parseInt(1));
         }
+        
+
     });
     $('.js-btn-plus').on('click', function(e){
         e.preventDefault();
-        if ( $(this).closest('.input-group').find('.quantity').val() < 100  ) {
+        var max = parseInt($(this).closest('.input-group').find('.quantity').attr('max'));
+        
+        if ( $(this).closest('.input-group').find('.quantity').val() < max  ) {
             $(this).closest('.input-group').find('.quantity').val(parseInt($(this).closest('.input-group').find('.quantity').val()) + 1);
         } else {
-            $(this).closest('.input-group').find('quantity').val(parseInt(100));
+            $(this).closest('.input-group').find('quantity').val(max);
         }
+        //var qua = $('#orderquantity').val();
+        //var prod = $("#product_id").val();
+        //$("#orderbutton").attr("href", "/order/"+prod+"/"+qua);
+        //$('#aaa').text("/order/"+prod+"/"+qua);
     });
+    $('#orderbutton').on('click', function(e){
+        e.preventDefault();
+        var qua = $('#orderquantity').val();
+        var prod = $("#product_id").val();
+        $("#orderbutton").attr("href", "/order/"+prod+"/"+qua);
+        document.location.href = "/order/"+prod+"/"+qua;
+    });
+    $('.quantity').change(function() {
+        var mx = parseInt( $(this).closest('.input-group').find('.quantity').attr('max') );
+        
+        if ( $(this).closest('.input-group').find('.quantity').val() > mx  ) {
+            $(this).closest('.input-group').find('.quantity').val(mx);
+        }
+        if ( $(this).closest('.input-group').find('.quantity').val() <1  ) {
+            $(this).closest('.input-group').find('.quantity').val(parseInt(1));
+        }
+        
+    });
+    $('.quantity').keypress()(function() {
+        var mx = parseInt( $(this).closest('.input-group').find('.quantity').attr('max') );
+        
+        if ( $(this).closest('.input-group').find('.quantity').val() > mx  ) {
+            $(this).closest('.input-group').find('.quanti   ty').val(mx);
+        }
+        if ( $(this).closest('.input-group').find('.quantity').val() <1  ) {
+            $(this).closest('.input-group').find('.quantity').val(parseInt(1));
+        }
+        
+    });
+
+    
 };
 sitePlusMinus();
 });

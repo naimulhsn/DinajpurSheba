@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container pt-4">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -15,7 +15,7 @@
                             <img src={{$product->image->image_link}} class="img-fluid mb-4" alt="">
                         </div>
                     </div>
-                    <form method="POST" action="{{ route('Products.update',$product->id) }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('products.update',$product->id) }}" enctype="multipart/form-data">
                         @csrf
                         @method('PATCH')
 

@@ -16,7 +16,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::resource('Products','ProductController');
-Auth::routes();
+Route::resource('products','ProductController');
+Route::resource('profile','ProfileController')->only([
+    'show', 'edit', 'update'
+]);
+Route::resource('orders','OrdersController');
+Route::get('/order/{product}/{quantity}', 'OrdersController@order')->name('order')->middleware('auth');
 
+Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
