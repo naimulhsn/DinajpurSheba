@@ -48,7 +48,7 @@
                         
                         {{-- stock --}}
                         <div class="form-group row">
-                            <label for="stock" class="col-md-3 col-form-label text-md-right">{{ __(' স্টক ') }}</label>
+                            <label for="stock" class="col-md-3 col-form-label text-md-right">{{ __(' স্টক (হাজার)') }}</label>
                             <div class="col-md-7">
                                 <input id="stock" type="number" min="1" max="1000000" class="form-control @error('stock') is-invalid @enderror" name="stock" 
                                 value="{{ old('stock') }}" required autocomplete="stock" autofocus>
@@ -61,7 +61,7 @@
                         </div>
                         {{-- Priceeeeee --}}
                         <div class="form-group row">
-                            <label for="price" class="col-md-3 col-form-label text-md-right">{{ __(' মূল্য ') }}</label>
+                            <label for="price" class="col-md-3 col-form-label text-md-right">{{ __(' মূল্য (প্রতি হাজারের)') }}</label>
                             <div class="col-md-7">
                                 <input id="price" type="number" min="5" max="100000" class="form-control @error('price') is-invalid @enderror" name="price"
                                 value="{{ old('price') }}" required autocomplete="price" autofocus>

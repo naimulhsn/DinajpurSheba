@@ -26,7 +26,23 @@ class OrdersController extends Controller
      */
     public function index()
     {
-        return view('order.allorders');
+        $user = Auth::user();
+        if($user->type=='Buyer'){
+            $orders = Order::where('buyer_id',$user->id)->latest()->get();
+            //dd($orders);
+            $seller=[];
+            foreach($orders as $order){
+                $seller[$order->id]= User::find($order->seller_id);
+            }
+            return view('order.buyermyorders',[
+                'orders' => $orders,
+                'seller' => $seller
+            ]);    
+        }
+        else if($user->type=='selelr'){
+            return view('order.sellermyorders');
+        }
+        else return "Contact Developer";
     }
 
     /**
@@ -95,6 +111,7 @@ class OrdersController extends Controller
             'buyer_id' => $user->id,
             'seller_id' => $seller->id,
             'product_id'=> $validated['product_id'],
+            'buyer_phone'=> $validated['phone'],
             'delivery_address'=> $validated['delivery_address'],
             'unit_price' => $product->price,
             'quantity'=> $validated['quantity'],

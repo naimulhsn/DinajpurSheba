@@ -30,7 +30,7 @@
 <body>
     <div id="app" >
         <nav class="navbar navbar-expand-md navbar-dark bg-primary shadow-sm">
-            <div class="container" style="font-weight:500">
+            <div class="container">
                 <a class="navbar-brand" href="{{ url('/home') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>

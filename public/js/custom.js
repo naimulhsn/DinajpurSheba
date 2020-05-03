@@ -114,17 +114,6 @@ var sitePlusMinus = function() {
         }
         
     });
-    $('.quantity').keypress()(function() {
-        var mx = parseInt( $(this).closest('.input-group').find('.quantity').attr('max') );
-        
-        if ( $(this).closest('.input-group').find('.quantity').val() > mx  ) {
-            $(this).closest('.input-group').find('.quanti   ty').val(mx);
-        }
-        if ( $(this).closest('.input-group').find('.quantity').val() <1  ) {
-            $(this).closest('.input-group').find('.quantity').val(parseInt(1));
-        }
-        
-    });
 
     
 };

@@ -18,6 +18,7 @@ class CreateOrdersTable extends Migration
             $table->bigInteger('buyer_id');
             $table->bigInteger('seller_id');
             $table->bigInteger('product_id');
+            $table->string('buyer_phone');
             $table->string('delivery_address');
             $table->integer('unit_price');
             $table->integer('quantity');
@@ -27,6 +28,7 @@ class CreateOrdersTable extends Migration
             $table->string('payment_method');
             $table->string('approved')->default("No");
             $table->string('approval_time')->nullable();
+            $table->string('order_status')->nullable();
             $table->timestamps();
         });
     }

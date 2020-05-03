@@ -14,7 +14,7 @@
 
                         {{-- full name --}}
                         <div class="form-group row">
-                            <label for="name" class="col-md-3 col-form-label text-md-right">{{ __(' আপনার সম্পূর্ণ নাম ') }}</label>
+                            <label for="name" class="col-md-3 col-form-label text-md-right">{{ __(' সম্পূর্ণ নাম ') }}</label>
                             <div class="col-md-7">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" 
                                 value="{{ $user->name }}" required autocomplete="name" >

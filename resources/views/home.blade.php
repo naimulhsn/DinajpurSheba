@@ -9,7 +9,6 @@
                 <ol class="carousel-indicators">
                     <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
                     <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
-                    <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
                 </ol>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
@@ -20,14 +19,7 @@
                         <button class="btn btn-outline-light"> Order now </button>
                     </div>
                     </div>
-                    <div class="carousel-item">
-                    <img src="images\web\litchi 2.jpg" class="d-block w-100" alt="...">
-                    <div class="carousel-caption d-none d-md-block text-left text-success text-strock">
-                        <h5> লিচু </h5>
-                        <p>পাইকারি ক্রয় ও বিক্রয় </p>
-                        <button class="btn btn-outline-success"> Order now </button>
-                    </div>
-                    </div>
+                    
                     <div class="carousel-item">
                     <img src="images\web\litchi 3.jpg" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block text-left">
