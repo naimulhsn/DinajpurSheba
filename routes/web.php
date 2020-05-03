@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/home');
 });
 Route::resource('products','ProductController');
 Route::resource('profile','ProfileController')->only([

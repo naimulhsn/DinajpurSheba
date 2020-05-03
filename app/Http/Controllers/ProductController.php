@@ -14,7 +14,7 @@ class ProductController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except(['']);
+        $this->middleware('auth')->except(['show']);
     }
     /**
      * Display a listing of the resource.
@@ -109,12 +109,13 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
+    { /*
         $product = Product::where('id',$id)->first();
         //dd($product);
         return view('product.edit',[
             'product' =>$product
         ]);
+        */
     }
 
     /**
@@ -126,6 +127,7 @@ class ProductController extends Controller
      */
     public function update(Request $request,  $id)
     {
+        /*
         
         $product = Product::findOrFail($id);
         if($product->user_id!= auth()->id() )abort(403);
@@ -144,6 +146,7 @@ class ProductController extends Controller
         //dd($id);
         $product->save();
         return redirect()->route('products.show',$product->id)->with('status',' পন্যটির তথ্য আপডেট হয়ে গেছে');
+        */
     }
 
     /**

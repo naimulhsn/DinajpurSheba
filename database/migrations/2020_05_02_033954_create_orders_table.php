@@ -28,7 +28,7 @@ class CreateOrdersTable extends Migration
             $table->string('payment_method');
             $table->string('approved')->default("No");
             $table->string('approval_time')->nullable();
-            $table->string('order_status')->nullable();
+            $table->string('status')->default("The order is waiting for seller approval.");
             $table->timestamps();
         });
     }

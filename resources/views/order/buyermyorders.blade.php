@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container-fluid bg-dark">
+<div class="container-fluid bg-dark"  style="min-height:100vh" >
     @if (session('status'))
-        <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+        <div class="alert alert-success alert-dismissible fade show " role="alert">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
             {{ session('status') }}
         </div>
@@ -20,7 +20,10 @@
             <div class="card">
                 <div class="card-header bg-secondary text-white">
                     Order no. {{$order->id}} 
-                    @if($order->approved=='No') (Waiting for approval)@endif 
+                    @if($order->approved=='No') (Waiting for approval)
+                    @elseif($order->approved=='approved')(Confirmed)
+                    @elseif($order->approved=='rejected') (Rejected By Seller)
+                    @endif 
                     <span class="pull-right">Order date - {{ $order->created_at->format('d M Y ') }}</span>
                 
                 </div>
@@ -82,7 +85,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-6  text-right">Payment Method</div>
-                                        <div class="col-6"> ৳ {{$order->payment_method }} </div>
+                                        <div class="col-6">{{$order->payment_method }} </div>
                                     </div>
                                     
                                 </div>
@@ -114,7 +117,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-6 text-right">Loading Point</div>
-                                        <div class="col-6"> ৳ {{$order->product->loading_point }} </div>
+                                        <div class="col-6">{{$order->product->loading_point }} </div>
                                     </div>
                                     
                                 </div>
@@ -127,10 +130,7 @@
 
                 <div class="card-footer">
                     <strong>Status :</strong>
-                    @if($order->approved=='No') 
-                    The order is waiting for seller approval. Please complete your payment. 
-                    @else Order is in delivery process. 
-                    @endif
+                    {{$order->status}}
                 </div>
 
 

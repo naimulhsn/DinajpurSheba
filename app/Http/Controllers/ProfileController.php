@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\User;
 use App\Seller;
+use App\Buyer;
 use App\Product;
 
 class ProfileController extends Controller
@@ -55,7 +56,6 @@ class ProfileController extends Controller
     public function show($id)
     {
         $user = User::findOrFail($id);
-        if($user->type != 'Seller')abort(403);
         $products = $user->products()->orderby('updated_at','desc')->paginate(12);
         return view('profile.show',[
             'user' => $user,
@@ -83,7 +83,8 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if($id != auth()->id() )abort(403);
+        $user = Auth::user();
+        if($id != $user->id )abort(403);
 
         $val=request()->validate([
             'nid' => '',
@@ -94,16 +95,23 @@ class ProfileController extends Controller
             request()->image->move(public_path('images/profile'), $imageName);
         }
         
-
-        $seller = Seller::where('user_id',$id)->first();
-        if($request->has('nid') && $val['nid']!=null ){
-            $seller->nid = $val['nid'];
+        if($user->type == 'Seller'){
+            $seller = Seller::where('user_id',$id)->first();
+            if($request->has('nid') && $val['nid']!=null ){
+                $seller->nid = $val['nid'];
+            }
+            if($request->hasFile('image')){
+                $seller->image = "/images/profile/".$imageName; 
+            }
+            $seller->save();
         }
-        if($request->hasFile('image')){
-            $seller->image = "/images/profile/".$imageName; 
+        else if($user->type == 'Buyer'){
+            $buyer = Buyer::where('user_id',$id)->first();
+            if($request->hasFile('image')){
+                $buyer->image = "/images/profile/".$imageName; 
+            }
+            $buyer->save();
         }
-        $seller->save();
-
         return redirect()->route('profile.show',$id)->with('status',' প্রোফাইলের তথ্য আপডেট হয়ে গেছে');
     }
 

@@ -45,7 +45,7 @@
                                     <br>
                                     
                                     <a class="btn btn-outline-success btn-block card-linkk" href="{{route('products.show',$product->id)}} " role="button">পণ্যটি দেখুন</a>
-                                    <a class="btn btn-outline-primary btn-block card-linkk" href="{{route('products.edit',$product->id)}}" role="button"> তথ্য পরিবর্তন করুন</a>                                              
+                                                                               
                                     <form method="POST" action="{{ route('products.destroy',$product->id) }}">
                                         @csrf
                                         @method('DELETE')

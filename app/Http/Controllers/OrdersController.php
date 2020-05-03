@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Carbon\Carbon;
 use Auth;
 use App\User;
 use App\Product;
@@ -36,11 +37,22 @@ class OrdersController extends Controller
             }
             return view('order.buyermyorders',[
                 'orders' => $orders,
-                'seller' => $seller
+                'seller' => $seller,
+                'user'  =>$user
             ]);    
         }
-        else if($user->type=='selelr'){
-            return view('order.sellermyorders');
+        else if($user->type=='Seller'){
+            $orders = Order::where('seller_id',$user->id)->latest()->get();
+            //dd($orders);
+            $buyer=[];
+            foreach($orders as $order){
+                $buyer[$order->id]= User::find($order->buyer_id);
+            }
+            return view('order.sellermyorders',[
+                'orders' => $orders,
+                'buyer' => $buyer,
+                'user' =>$user
+            ]); 
         }
         else return "Contact Developer";
     }
@@ -156,7 +168,22 @@ class OrdersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $order = Order::findOrFail($id);
+        if($order->seller_id!== Auth::user()->id)\abort(403);
+        //dd($request->input());
+        $validated = request()->validate([
+            'approved'=>[ 'required',Rule::in(['approved','rejected']) ],
+        ]);
+        
+        $order->approved = $validated['approved'];
+        $order->approval_time = Carbon::now()->toDateTimeString();
+        if($validated['approved']=='approved'){
+            $order->status = "The Order is in Delivery Process now.";
+        }else{
+            $order->status = "The Order has been rejected by Seller";
+        }
+        $order->save();
+        return back();
     }
 
     /**

@@ -90,10 +90,17 @@
 
 
                                 <div>
+                                    @guest
+                                    <a href={{ route('order',['product'=>$product->id, 'quantity'=>1 ])}} id="orderbutton" 
+                                        class="btn btn-danger btn-block" role="button" aria-pressed="true" > 
+                                        অর্ডার করুন </a>
+                                    @endguest
+                                    @auth
                                     <a href={{ route('order',['product'=>$product->id, 'quantity'=>1 ])}} id="orderbutton" 
                                         class=" @if ($product->user_id==Auth::user()->id)disabled @endif
                                         btn btn-danger btn-block" role="button" aria-pressed="true" > 
                                         অর্ডার করুন </a>
+                                    @endauth
                                     <a href={{ route('profile.show',$product->user_id)}} class="btn btn-primary btn-block" role="button" aria-pressed="true"> 
                                         আরো জানতে যোগাযোগ করুন</a>
                                 </div>
